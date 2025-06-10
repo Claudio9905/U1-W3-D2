@@ -35,8 +35,11 @@
 
   <body>
     <div id="div-1">
-      <h1>Questo è il titolo della pagina</h1>
-      <h2>Questo è il sottotitolo della pagina</h2>
+      <h1 onclick="makeItClickable()">Questo è il titolo della pagina</h1>
+
+      <h2 onclick="changeColorWithRandom()">
+        Questo è il sottotitolo della pagina
+      </h2>
     </div>
 
     <div class="change-link" class="add-Link" class="hideList">
@@ -47,8 +50,6 @@
         <li>2nd</li>
         <li>3rd</li>
       </ul>
-      <button onclick="hideFirstUl()">Nascondi Lista</button>
-
       <ul id="secondList">
         <li>1st</li>
         <li>2nd</li>
@@ -86,7 +87,7 @@
       */
 
       const changeTitle = function () {
-        const h1 = document.querySelector(`div h1`);
+        const h1 = document.querySelector(`h1`);
         h1.innerText = `EPICBlog`;
       };
 
@@ -97,7 +98,7 @@
       */
 
       const addClassToTitle = function () {
-        const h1 = document.querySelector(`div h1`);
+        const h1 = document.querySelector(`h1`);
         h1.classList.add(`myHeading`);
       };
 
@@ -121,11 +122,9 @@
         */
 
       const changeUrls = function () {
-        const changeA = document.querySelectorAll(".change-link a");
-        for (let i = 0; i < changeA.length; i++) {
-          changeA[i].innerText = "Questo link porta a google";
-          changeA[i].setAttribute("href", "https://www.google.com"); // si può usare anche innerHTML
-        }
+        const changeA = document.querySelector("a");
+        changeA.innerText = "Questo link porta a google";
+        changeA.setAttribute("href", "https://www.google.com"); // si può usare anche innerHTML
       };
 
       changeUrls();
@@ -171,7 +170,9 @@
 
       const paintItGreen = function () {
         const greenUl = document.getElementsByTagName("ul");
-        greenUl.style.backgroundColor = "green";
+        for (let i = 0; i < greenUl.length; i++) {
+          greenUl[i].style.backgroundColor = "green";
+        }
       };
 
       paintItGreen();
@@ -180,38 +181,108 @@
          Scrivi una funzione che rimuova l'ultima lettera dall'h1 ogni volta che l'utente lo clicca
         */
 
-      const makeItClickable = function () {};
+      const makeItClickable = function () {
+        const removeLetterFromH1 = document.getElementsByTagName("h1")[0];
+        removeLetterFromH1.innerText.slice(
+          0,
+          (removeLetterFromH1.innerText =
+            removeLetterFromH1.innerText.length - 1)
+        );
+      };
+      makeItClickable();
 
       /* ESERCIZIO 10
          Crea una funzione che, al click sul footer, riveli l'URL del link interno come contenuto di un alert()
         */
 
-      const revealFooterLink = function () {};
+      const revealFooterLink = function () {
+        const link = document.querySelector("footer a");
+        alert(link.getAttribute("href"));
+      };
 
       /* ESERCIZIO 11
          Crea una funzione che crei una tabella nell'elemento con id "tableArea".
          La tabella avrà 5 elementi e questa struttura: immagine, nome prodotto, quantità, prezzo
       */
 
-      const generateTable = function () {};
-
+      const generateTable = function () {
+        const container = document.getElementById("tableArea");
+        container.innerHTML = `<table>
+          <tr>
+            <th>Immagine</th>
+            <th>Nome Prodotto</th>
+            <th>Quantità</th>
+            <th>Prezzo</th>
+          </tr>
+          <tr>
+            <td><img src="https://placebear.com/70/70"></td>
+            <td>Orso</td>
+            <td>8</td>
+            <td>$10000</td>
+          </tr>
+          <tr>
+            <td>img src="https://placebear.com/70/70"</td>
+            <td>Orso</td>
+            <td>8</td>
+            <td>$10000</td>
+          </tr>
+          <tr>
+            <td>img src="https://placebear.com/70/70"</td>
+            <td>Orso</td>
+            <td>8</td>
+            <td>$10000</td>
+          </tr>
+          <tr>
+            <td>img src="https://placebear.com/70/70"</td>
+            <td>Orso</td>
+            <td>8</td>
+            <td>$10000</td>
+          </tr>
+        </table>`;
+      };
+      generateTable();
       /* ESERCIZIO 12
          Crea una funzione che aggiunga una riga alla tabella precedentemente creata e fornisca i dati necessari come parametri
       */
 
-      const addRow = function () {};
+      const addRow = function () {
+        const table = document.querySelector("tableArea table");
+        table.innerHTML += `<tr>
+          <td>img src="https://placebear.com/70/70"</td>;
+          <td>Orso Polare</td>;
+          <td>1</td>;
+          <td>$20000</td>
+        </tr>
+        `;
+      };
+
+      addRow("https://placebear.com/50/50", "Orso 6", 1, "150");
 
       /* ESERCIZIO 14
         Crea una funzione che nasconda le immagini della tabella quando eseguita
       */
 
-      const hideAllImages = function () {};
-
+      const hideAllImages = function () {
+        const allTheTableImages = document.querySelectorAll("table img");
+        allTheTableImages.forEach((imgTag) => {
+          imgTag.style.opacity = 0;
+        });
+      };
+      hideAllImages();
       /* EXTRA ESERCIZIO 15
         Crea una funzione che cambi il colore del h2 con id "changeMyColor" con un colore random ad ogni click ricevuto
       */
 
-      const changeColorWithRandom = function () {};
+      const changeColorWithRandom = function () {
+        const red = Math.floor(Math.random() * 256);
+        const green = Math.floor(Math.random() * 256);
+        const blue = Math.floor(Math.random() * 256);
+
+        const randomColor = `rgc(${red},${green},${blue})`;
+
+        const h2 = document.querySelector("h2");
+        h2.style.color = randomColor;
+      };
     </script>
   </body>
 </html>
