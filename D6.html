@@ -195,10 +195,17 @@
          Crea una funzione che, al click sul footer, riveli l'URL del link interno come contenuto di un alert()
         */
 
-      const revealFooterLink = function () {
-        const link = document.querySelector("footer a");
-        alert(link.getAttribute("href"));
+      const revealFooterLink = function (content) {
+        const footer = document.querySelector("footer");
+        footer.style.cursor = "pointer";
+        footer.onclick = function () {
+          const link = document.querySelector("footer a");
+          const URL = link.getAttribute("href");
+
+          alert(URL);
+        };
       };
+      revealFooterLink();
 
       /* ESERCIZIO 11
          Crea una funzione che crei una tabella nell'elemento con id "tableArea".
